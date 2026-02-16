@@ -43,13 +43,14 @@
             background: var(--bg-primary);
         }
 
-        /* Portrait image container - centered with gradient fades */
+        /* Portrait image container - right-aligned, bleeds off right edge */
         .hero-image-wrap {
             position: absolute;
             inset: 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
+            overflow: hidden;
         }
 
         .hero-image-wrap img {
@@ -57,28 +58,21 @@
             width: auto;
             object-fit: cover;
             display: block;
+            /* Let the right side bleed off naturally */
+            margin-right: -5%;
         }
 
-        /* Gradient fades on left and right edges */
-        .hero-image-wrap::before,
-        .hero-image-wrap::after {
+        /* Single gradient fade over the left portion of the image */
+        .hero-image-wrap::before {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 35%;
+            left: 0;
+            width: 65%;
             z-index: 1;
             pointer-events: none;
-        }
-
-        .hero-image-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 20%, transparent 100%);
-        }
-
-        .hero-image-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, var(--bg-primary) 0%, var(--bg-primary) 20%, transparent 100%);
+            background: linear-gradient(to right, var(--bg-primary) 30%, transparent 100%);
         }
 
         /* Top and bottom fades */
@@ -262,9 +256,12 @@
                 margin: 2rem auto 0;
             }
 
-            .hero-image-wrap::before,
-            .hero-image-wrap::after {
-                width: 15%;
+            .hero-image-wrap::before {
+                width: 40%;
+            }
+
+            .hero-image-wrap img {
+                margin-right: 0;
             }
         }
 
